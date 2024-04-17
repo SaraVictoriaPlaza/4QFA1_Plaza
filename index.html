@@ -4,101 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLAZA</title>
+    <style>
+        body{
+            background-color: rgb(87, 79, 161);
+        }
+        #form {
+            border: 2px solid black;
+            width: 30vw;
+            height: 70vh;
+            background-color: rgba(235, 222, 217, 0.664);
+            padding: 5%;
+            border-radius: 20px;
+            position: relative;
+            left: 30vw;
+            top: 5vw;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: larger;
+            font-weight: 800;
+            position: relative;
+            left:30vw;
+            top:5vh;
+        }
+        #title {
+            text-align: center;
+            padding: 3%;
+            font-weight: 800;
+            font-size: larger;
+        }
+        #submit-btn, #reset-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #314458;
+            color: #fff;
+            transition: transform 0.5s;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        #submit-btn:hover, #reset-btn:hover {
+            background-color: #aeacc2;
+            transform: scale(1.1);
+        }
+        .input-error {
+            border: 2px solid red;
+        }
+        .input-success {
+            border: 2px solid green;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #314458;
+            background-color: rgba(168, 118, 97, 0.664);
+            border-radius: 10px;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            left: 1.5vw;
+            top: 10vh;
+        }
+    </style>
 </head>
 <body>
-    
-    <form id="login">
-<fieldset id="form"form="login">
-<legend  id="title">Log-in Credentials: </legend>
-        <label for="name">Name:</label><br/>
-        <input type="text" id="onblur" name="inpname" onblur="inputblur()"><br/>
-        <label for="username">Username:</label><br/>
-        <input type="text" id="onblur" name="userName" onblur="inputblur()"><br/>
-        <label for="password">Password: </label><br/>
-        <input type = "password" id="onblur" name="password" onblur="inputblur()"><br/>
-        <label for="email">Email: </label><br/>
-        <input type = "email" id="onblur" name="email" onblur="inputblur()"><br/>
-        <label for="tArea">Address: </label></br>
-        <textarea id="tArea" name="onblur" rows="4" cols="25" onblur="inputblur()"> </textarea><br/>
-        <label for="Interests">Interests: </label></br>
-        <textarea id="tArea" name="onblur" rows="4" cols="50" onblur="inputblur()"> </textarea> <br/>
-        <label for="gender">Select your gender: </label><br/>
-            <select name="gender" id="onblur">
+    <form id="login" onsubmit="return submitForm()">
+        <fieldset id="form">
+            <legend id="title">Log-in Credentials:</legend>
+            <label for="name">Name:</label><br/>
+            <input type="text" id="name" name="Name" onblur="inputBlur(this)" onfocus="inputFocus(this)"><br/>
+            <label for="username">Username:</label><br/>
+            <input type="text" id="username" name="Username" onblur="inputBlur(this)" onfocus="inputFocus(this)"><br/>
+            <label for="password">Password:</label><br/>
+            <input type="password" id="password" name="Password" onblur="inputBlur(this)" onfocus="inputFocus(this)"><br/>
+            <label for="email">Email:</label><br/>
+            <input type="email" id="email" name="Email" onblur="inputBlur(this)" onfocus="inputFocus(this)"><br/>
+            <label for="tArea">Address:</label><br/>
+            <textarea id="address" name="Address" rows="4" cols="25" onblur="inputBlur(this)" onfocus="inputFocus(this)"></textarea><br/>
+            <label for="Interests">Interests:</label><br/>
+            <textarea id="interests" name="Interests" rows="4" cols="50" onblur="inputBlur(this)" onfocus="inputFocus(this)"></textarea><br/>
+            <label for="gender">Select your gender:</label><br/>
+            <select id="gender" name="Gender" onblur="inputBlur(this)" onfocus="inputFocus(this)">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-                <option value="prefnotmention">Prefer not to mention</option>
-            </select> <br/>
-        <input id="button" type = "submit" value = "Submit form"><br/>
-        <input id="button" type = "reset" value = "Reset" >
-</fieldset>
+                <option value="pmn">Prefer not to mention</option>
+            </select><br/>
+            <input id="submit-btn" type="submit" value="Submit form">
+            <input id="reset-btn" type="reset" value="Reset" onclick="resetForm()">
+        </fieldset>
     </form>
+    <div id="output"></div>
+    <script>
+function inputBlur(inp) {
+            if (inp=== "") {
+                inp.style.border = "2px solid red";
+            } else {
+                inp.style.border = "2px solid green";
+            }
+        }
+        
+function inputFocus(inp) {
+            inp.style.border = "";
+        }
+        
+function submitForm() {
+    var div = document.getElementById("output");
+    var html = "<h2>User Information:</h2>";
+    var form = document.getElementById("login").elements;
+    for (var i = 0; i < form.length; i++) {
+        if (form[i].type !== "submit" && form[i].type !== "reset") {
+            if (form[i].value !== undefined) { 
+                html += "<p><strong>" + form[i].name + ":</strong> " + form[i].value + "</p>";
+            }
+        }
+    }
+    div.innerHTML = html;
+    return false;
+}
+
+function resetForm() {
+        var div = document.getElementById("output");
+        div.innerHTML = ""; 
+        var form = document.getElementById("login").elements;
+        for (var i = 0; i < form.length; i++) {
+        if (form[i].type !== "submit" && form[i].type !== "reset") {
+            if (form[i].tagName.toLowerCase() === "select") {
+                form[i].selectedIndex = 0; 
+            } else {
+                form[i].style.border = "";
+                form[i].value = ""; 
+            }
+        }
+    }
+    return false; 
+}
+
+    </script>
 </body>
-<style>
-    #form{
-        border: 2px black;
-        width: 30vw;
-        height: 60vh;
-        background-color: rgba(235, 222, 217, 0.664);
-        padding: 3%;
-        border-radius: 20%;
-        position: relative;
-        left: 30vw;
-        top: 5vw;
-        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-size: larger;
-        font-weight: 800;
-        transform: translateX(50%);
-    animation: grow-and-shrink 2000ms;
-    animation-timing-function: ease-in-out;
-    animation-direction: alternate;
-    }
-    #title{
-        text-align: center;
-        padding:3%;
-        font-weight: 800;
-        font-size: larger;
-       
-    }
-    #button{
-     padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    background-color: #314458;
-    color: #fff;
-    transition: transform 0.5s;
-    border-radius: 5px;
-    margin: 5px;
-    }
-    #button:hover {
-    background-color: #1d04fd;
-    transform: scale(1.2);
-}
-@keyframes grow-and-shrink {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.5);
-    }
-  }
-  body{
-    background-color: rgba(0, 0, 0, 0.589);
-  }
-</style>
-<script>
-  function inputblur() {
-    var x = document.getElementById("onblur").value;
-    if (x == ""){
+</html>
 
-      alert("Go back to the textbox!");
-      return;
-    }
-    else{
-    alert("Value accepted.");
-    return;
-    }
-}
-  function namefocus(){
-
-  }
-</script>
