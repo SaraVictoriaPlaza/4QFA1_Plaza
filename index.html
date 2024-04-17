@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAZA</title>
+</head>
+<body>
+    
+    <form id="login">
+<fieldset id="form"form="login">
+<legend  id="title">Log-in Credentials: </legend>
+        <label for="name">Name:</label><br/>
+        <input type="text" id="onblur" name="inpname" onblur="inputblur()"><br/>
+        <label for="username">Username:</label><br/>
+        <input type="text" id="onblur" name="userName" onblur="inputblur()"><br/>
+        <label for="password">Password: </label><br/>
+        <input type = "password" id="onblur" name="password" onblur="inputblur()"><br/>
+        <label for="email">Email: </label><br/>
+        <input type = "email" id="onblur" name="email" onblur="inputblur()"><br/>
+        <label for="tArea">Address: </label></br>
+        <textarea id="tArea" name="onblur" rows="4" cols="25" onblur="inputblur()"> </textarea><br/>
+        <label for="Interests">Interests: </label></br>
+        <textarea id="tArea" name="onblur" rows="4" cols="50" onblur="inputblur()"> </textarea> <br/>
+        <label for="gender">Select your gender: </label><br/>
+            <select name="gender" id="onblur">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="prefnotmention">Prefer not to mention</option>
+            </select> <br/>
+        <input id="button" type = "submit" value = "Submit form"><br/>
+        <input id="button" type = "reset" value = "Reset" >
+</fieldset>
+    </form>
+</body>
+<style>
+    #form{
+        border: 2px black;
+        width: 30vw;
+        height: 60vh;
+        background-color: rgba(235, 222, 217, 0.664);
+        padding: 3%;
+        border-radius: 20%;
+        position: relative;
+        left: 30vw;
+        top: 5vw;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: larger;
+        font-weight: 800;
+        transform: translateX(50%);
+    animation: grow-and-shrink 2000ms;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    }
+    #title{
+        text-align: center;
+        padding:3%;
+        font-weight: 800;
+        font-size: larger;
+       
+    }
+    #button{
+     padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #314458;
+    color: #fff;
+    transition: transform 0.5s;
+    border-radius: 5px;
+    margin: 5px;
+    }
+    #button:hover {
+    background-color: #1d04fd;
+    transform: scale(1.2);
+}
+@keyframes grow-and-shrink {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.5);
+    }
+  }
+  body{
+    background-color: rgba(0, 0, 0, 0.589);
+  }
+</style>
+<script>
+  function inputblur() {
+    var x = document.getElementById("onblur").value;
+    if (x == ""){
+
+      alert("Go back to the textbox!");
+      return;
+    }
+    else{
+    alert("Value accepted.");
+    return;
+    }
+}
+  function namefocus(){
+
+  }
+</script>
